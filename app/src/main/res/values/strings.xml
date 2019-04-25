@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Stok Audit</string>
+    <string name="login">Login</string>
+    <string name="logo">Logo</string>
+    <string name="password">Password</string>
+    <string name="username">Username</string>
+    <string name="gmedia_stok_audit">GMEDIA STOK AUDIT</string>
+    <string name="search">Search</string>
+    <string name="search_hint">Search…</string>
+</resources>
