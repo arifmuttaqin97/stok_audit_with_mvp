@@ -5,10 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -30,20 +30,15 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class TambahBarangActivity extends AppCompatActivity implements TambahBarangView{
+public class TambahBarangActivity extends AppCompatActivity implements TambahBarangView {
 
     private final Map<String, String> headerMap = new HashMap<>();
     private final ArrayList<String> arrayList = new ArrayList<>();
     private final HashMap<String, Object> hashTambahBarang = new HashMap<>();
     private final ArrayList<HashMap<String, Integer>> idResponse = new ArrayList<>();
     private final String DATA_BARANG = "log_dataBarang";
-    private TextView testDataBarang;
-    private RelativeLayout btnBarcode;
-    private RelativeLayout btnPicture;
-    private Button btnSave;
     private RecyclerView rvGambar;
     private TextView testBarcode;
-    private SharedPreferences mLogin;
     private String kodeBarang = "";
     private TambahBarangAdapter tambahBarangAdapter;
     private String barcodes = "";
@@ -61,16 +56,16 @@ public class TambahBarangActivity extends AppCompatActivity implements TambahBar
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        testDataBarang = findViewById(R.id.testDataBarang);
-        btnBarcode = findViewById(R.id.btnBarcode);
-        btnPicture = findViewById(R.id.btnPicture);
-        btnSave = findViewById(R.id.btnSave);
+        TextView testDataBarang = findViewById(R.id.testDataBarang);
+        RelativeLayout btnBarcode = findViewById(R.id.btnBarcode);
+        RelativeLayout btnPicture = findViewById(R.id.btnPicture);
+        Button btnSave = findViewById(R.id.btnSave);
         rvGambar = findViewById(R.id.rvGambar);
         testBarcode = findViewById(R.id.testBarcode);
 
         tambahBarangPresenter = new TambahBarangPresenter(this);
 
-        mLogin = getSharedPreferences("Login", Context.MODE_PRIVATE);
+        SharedPreferences mLogin = getSharedPreferences("Login", Context.MODE_PRIVATE);
 
         if (mLogin.contains("username") && mLogin.contains("nik")) {
             headerMap.put("User-Name", Objects.requireNonNull(mLogin.getString("username", "")));
@@ -135,13 +130,13 @@ public class TambahBarangActivity extends AppCompatActivity implements TambahBar
 
     @Override
     public void addBarang() {
-         Toast.makeText(TambahBarangActivity.this, "Barang sudah berhasil disimpan", Toast.LENGTH_SHORT).show();
+        Toast.makeText(TambahBarangActivity.this, "Barang sudah berhasil disimpan", Toast.LENGTH_SHORT).show();
 
-         Intent i = new Intent(TambahBarangActivity.this, DetailBarangActivity.class);
-         i.putExtra("Site", id_lokasi);
-         i.putExtra("Nama_Site", nama_site);
-         startActivity(i);
-         finish();
+        Intent i = new Intent(TambahBarangActivity.this, DetailBarangActivity.class);
+        i.putExtra("Site", id_lokasi);
+        i.putExtra("Nama_Site", nama_site);
+        startActivity(i);
+        finish();
     }
 
     @Override

@@ -24,7 +24,7 @@ class DetailBarangPresenter {
         this.detailBarangView = detailBarangView;
     }
 
-    public void getDataDetailBarang(Map<String, String> headerMap, HashMap<String, String> hashMap){
+    public void getDataDetailBarang(Map<String, String> headerMap, HashMap<String, String> hashMap) {
         RetrofitService retrofitService = RetrofitBuilder.getApi().create(RetrofitService.class);
         Call<ApiResponse> call = retrofitService.detailBarang(headerMap, hashMap);
         call.enqueue(new Callback<ApiResponse>() {
@@ -54,7 +54,7 @@ class DetailBarangPresenter {
         });
     }
 
-    public void getMoreDataBarang(Map<String, String> headerMap, HashMap<String, String> hashMap){
+    public void getMoreDataBarang(Map<String, String> headerMap, HashMap<String, String> hashMap) {
         RetrofitService retrofitService = RetrofitBuilder.getApi().create(RetrofitService.class);
         Call<ApiResponse> call = retrofitService.detailBarang(headerMap, hashMap);
         call.enqueue(new Callback<ApiResponse>() {

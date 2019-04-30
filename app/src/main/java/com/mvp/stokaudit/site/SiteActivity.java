@@ -4,9 +4,9 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.Menu;
@@ -20,25 +20,22 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.internal.LinkedTreeMap;
+import com.mvp.stokaudit.GeneralFunction;
 import com.mvp.stokaudit.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 public class SiteActivity extends AppCompatActivity implements SiteView {
 
     private final Map<String, String> headerMap = new HashMap<>();
     private final Integer count = 15;
     private final String SITE = "log_site";
-    private TextView testSite;
     private ListView listSite;
     private ProgressBar progressBar;
-    private SharedPreferences mLogin;
     private String customer;
-    private String nama_customer;
     private ArrayList<Site> arrayCustomerSite;
     private HashMap<String, String> hashCustomerSite;
     private Site site;
@@ -59,33 +56,36 @@ public class SiteActivity extends AppCompatActivity implements SiteView {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        testSite = findViewById(R.id.textSite);
+        TextView testSite = findViewById(R.id.textSite);
         listSite = findViewById(R.id.listSite);
         progressBar = findViewById(R.id.loading);
 
         sitePresenter = new SitePresenter(this);
 
-        mLogin = getSharedPreferences("Login", Context.MODE_PRIVATE);
+        SharedPreferences mLogin = getSharedPreferences("Login", Context.MODE_PRIVATE);
 
-        if (mLogin.contains("username") && mLogin.contains("nik")) {
-            headerMap.put("User-Name", Objects.requireNonNull(mLogin.getString("username", "")));
-            headerMap.put("User-Id", Objects.requireNonNull(mLogin.getString("nik", "")));
-        } else {
-            headerMap.put("User-Name", "");
-            headerMap.put("User-Id", "");
-        }
+//        if (mLogin.contains("username") && mLogin.contains("nik")) {
+//            headerMap.put("User-Name", Objects.requireNonNull(mLogin.getString("username", "")));
+//            headerMap.put("User-Id", Objects.requireNonNull(mLogin.getString("nik", "")));
+//        } else {
+//            headerMap.put("User-Name", "");
+//            headerMap.put("User-Id", "");
+//        }
+//
+//        headerMap.put("Client-Service", "gmedia-stok-audit");
+//        headerMap.put("Auth-Key", "gmedia");
+//        headerMap.put("Content-Type", "application/json");
 
-        headerMap.put("Client-Service", "gmedia-stok-audit");
-        headerMap.put("Auth-Key", "gmedia");
-        headerMap.put("Content-Type", "application/json");
+        GeneralFunction generalFunction = new GeneralFunction();
+        generalFunction.getHeader(mLogin, headerMap);
 
         customer = getIntent().getStringExtra("Customer");
-        nama_customer = getIntent().getStringExtra("Nama_Customer");
+        String nama_customer = getIntent().getStringExtra("Nama_Customer");
 
         testSite.setText(nama_customer);
     }
 
-    private void getSite(final String search, final String params){
+    private void getSite(final String search, final String params) {
         arrayCustomerSite = new ArrayList<>();
         hashCustomerSite = new HashMap<>();
 
@@ -102,7 +102,7 @@ public class SiteActivity extends AppCompatActivity implements SiteView {
         moreParams = params;
     }
 
-    private void getMore(String searchMore, String params){
+    private void getMore(String searchMore, String params) {
         arrayCustomerSite = new ArrayList<>();
         hashCustomerSite = new HashMap<>();
 

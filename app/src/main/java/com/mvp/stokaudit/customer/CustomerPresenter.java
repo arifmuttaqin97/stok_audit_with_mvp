@@ -24,7 +24,7 @@ class CustomerPresenter {
         this.customerView = customerView;
     }
 
-    public void getDataCustomer(Map<String, String> headerMap, HashMap<String, String> hashMap){
+    public void getDataCustomer(Map<String, String> headerMap, HashMap<String, String> hashMap) {
         RetrofitService retrofitService = RetrofitBuilder.getApi().create(RetrofitService.class);
         Call<ApiResponse> call = retrofitService.customer(headerMap, hashMap);
         call.enqueue(new Callback<ApiResponse>() {
@@ -54,7 +54,7 @@ class CustomerPresenter {
         });
     }
 
-    public void getMoreCustomer(Map<String, String> headerMap, HashMap<String, String> hashMap){
+    public void getMoreCustomer(Map<String, String> headerMap, HashMap<String, String> hashMap) {
         RetrofitService retrofitService = RetrofitBuilder.getApi().create(RetrofitService.class);
         Call<ApiResponse> call = retrofitService.customer(headerMap, hashMap);
         call.enqueue(new Callback<ApiResponse>() {

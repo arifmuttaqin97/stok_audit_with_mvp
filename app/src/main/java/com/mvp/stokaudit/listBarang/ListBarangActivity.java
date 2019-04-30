@@ -4,9 +4,9 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.Menu;
@@ -19,13 +19,13 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.gson.internal.LinkedTreeMap;
+import com.mvp.stokaudit.GeneralFunction;
 import com.mvp.stokaudit.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 public class ListBarangActivity extends AppCompatActivity implements ListBarangView {
 
@@ -34,7 +34,6 @@ public class ListBarangActivity extends AppCompatActivity implements ListBarangV
     private final String MASTER = "log_master";
     private ListView listMaster;
     private ProgressBar progressBar;
-    private SharedPreferences mLogin;
     private String id_lokasi = "";
     private String nama_site = "";
     private ArrayList<ListBarang> arrayListBarang;
@@ -61,25 +60,28 @@ public class ListBarangActivity extends AppCompatActivity implements ListBarangV
 
         listBarangPresenter = new ListBarangPresenter(this);
 
-        mLogin = getSharedPreferences("Login", Context.MODE_PRIVATE);
+        SharedPreferences mLogin = getSharedPreferences("Login", Context.MODE_PRIVATE);
 
-        if (mLogin.contains("username") && mLogin.contains("nik")) {
-            headerMap.put("User-Name", Objects.requireNonNull(mLogin.getString("username", "")));
-            headerMap.put("User-Id", Objects.requireNonNull(mLogin.getString("nik", "")));
-        } else {
-            headerMap.put("User-Name", "");
-            headerMap.put("User-Id", "");
-        }
+//        if (mLogin.contains("username") && mLogin.contains("nik")) {
+//            headerMap.put("User-Name", Objects.requireNonNull(mLogin.getString("username", "")));
+//            headerMap.put("User-Id", Objects.requireNonNull(mLogin.getString("nik", "")));
+//        } else {
+//            headerMap.put("User-Name", "");
+//            headerMap.put("User-Id", "");
+//        }
+//
+//        headerMap.put("Client-Service", "gmedia-stok-audit");
+//        headerMap.put("Auth-Key", "gmedia");
+//        headerMap.put("Content-Type", "application/json");
 
-        headerMap.put("Client-Service", "gmedia-stok-audit");
-        headerMap.put("Auth-Key", "gmedia");
-        headerMap.put("Content-Type", "application/json");
+        GeneralFunction generalFunction = new GeneralFunction();
+        generalFunction.getHeader(mLogin, headerMap);
 
         id_lokasi = getIntent().getStringExtra("id_lokasi");
         nama_site = getIntent().getStringExtra("nama_site");
     }
 
-    private void getMaster(final String search){
+    private void getMaster(final String search) {
         arrayListBarang = new ArrayList<>();
         hashListBarang = new HashMap<>();
 
@@ -94,7 +96,7 @@ public class ListBarangActivity extends AppCompatActivity implements ListBarangV
         moreSearch = search;
     }
 
-    private void getMore(String search){
+    private void getMore(String search) {
         arrayListBarang = new ArrayList<>();
         hashListBarang = new HashMap<>();
 

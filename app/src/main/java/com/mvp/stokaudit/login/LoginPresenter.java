@@ -1,8 +1,10 @@
 package com.mvp.stokaudit.login;
 
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
+import android.widget.EditText;
 
 import com.google.gson.internal.LinkedTreeMap;
 import com.mvp.stokaudit.ApiResponse;
@@ -19,11 +21,28 @@ import retrofit2.Response;
 class LoginPresenter {
     private final LoginView loginView;
 
-    public LoginPresenter(LoginView loginView) {
+    LoginPresenter(LoginView loginView) {
         this.loginView = loginView;
     }
 
-    public void getDataLogin(HashMap<String, String> hashMap){
+    void checkUsername(SharedPreferences sharedPreferences) {
+        if (sharedPreferences.contains("username")) {
+            loginView.userFound();
+        }
+    }
+
+    void login(EditText username, EditText password) {
+        String tmpUser = username.getText().toString();
+        String tmpPass = password.getText().toString();
+
+        if (tmpUser.equals("") || tmpPass.equals("")) {
+            loginView.emptyField();
+        } else {
+            loginView.login(tmpUser, tmpPass);
+        }
+    }
+
+    void getDataLogin(HashMap<String, String> hashMap) {
         RetrofitService retrofitService = RetrofitBuilder.getApi().create(RetrofitService.class);
         Call<ApiResponse> call = retrofitService.login(hashMap);
         call.enqueue(new Callback<ApiResponse>() {

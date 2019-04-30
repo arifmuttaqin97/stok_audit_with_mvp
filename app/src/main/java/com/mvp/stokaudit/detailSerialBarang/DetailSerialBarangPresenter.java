@@ -25,7 +25,7 @@ class DetailSerialBarangPresenter {
         this.detailSerialBarangView = detailSerialBarangView;
     }
 
-    public void getDataDetailSerial(Map<String, String> headerMap, HashMap<String, String> hashMap){
+    public void getDataDetailSerial(Map<String, String> headerMap, HashMap<String, String> hashMap) {
         RetrofitService retrofitService = RetrofitBuilder.getApi().create(RetrofitService.class);
         Call<ApiResponse> call = retrofitService.detailSerial(headerMap, hashMap);
         call.enqueue(new Callback<ApiResponse>() {
@@ -55,7 +55,7 @@ class DetailSerialBarangPresenter {
         });
     }
 
-    public void getMoreDetailSerial(Map<String, String> headerMap, HashMap<String, String> hashMap){
+    public void getMoreDetailSerial(Map<String, String> headerMap, HashMap<String, String> hashMap) {
         RetrofitService retrofitService = RetrofitBuilder.getApi().create(RetrofitService.class);
         Call<ApiResponse> call = retrofitService.detailSerial(headerMap, hashMap);
         call.enqueue(new Callback<ApiResponse>() {

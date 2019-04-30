@@ -5,9 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.Menu;
@@ -20,6 +20,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.gson.internal.LinkedTreeMap;
+import com.mvp.stokaudit.GeneralFunction;
 import com.mvp.stokaudit.R;
 import com.mvp.stokaudit.login.MainActivity;
 
@@ -27,7 +28,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 public class CustomerActivity extends AppCompatActivity implements CustomerView {
 
@@ -44,7 +44,6 @@ public class CustomerActivity extends AppCompatActivity implements CustomerView 
     private Integer startIndex = 0;
     private CustomerPresenter customerPresenter;
     private SearchView searchView;
-    private SharedPreferences.Editor editor;
     private String moreSearch;
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -60,20 +59,11 @@ public class CustomerActivity extends AppCompatActivity implements CustomerView 
 
         mLogin = getSharedPreferences("Login", Context.MODE_PRIVATE);
 
-        if (mLogin.contains("username") && mLogin.contains("nik")) {
-            headerMap.put("User-Name", Objects.requireNonNull(mLogin.getString("username","")));
-            headerMap.put("User-Id", Objects.requireNonNull(mLogin.getString("nik", "")));
-        } else {
-            headerMap.put("User-Name", "");
-            headerMap.put("User-Id", "");
-        }
-
-        headerMap.put("Client-Service", "gmedia-stok-audit");
-        headerMap.put("Auth-Key", "gmedia");
-        headerMap.put("Content-Type", "application/json");
+        GeneralFunction generalFunction = new GeneralFunction();
+        generalFunction.getHeader(mLogin, headerMap);
     }
 
-    private void getCustomer(final String search){
+    private void getCustomer(final String search) {
         arrayCustomer = new ArrayList<>();
         hashCustomer = new HashMap<>();
 
@@ -87,7 +77,7 @@ public class CustomerActivity extends AppCompatActivity implements CustomerView 
         moreSearch = search;
     }
 
-    private void getMore(String searchMore){
+    private void getMore(String searchMore) {
         arrayCustomer = new ArrayList<>();
         hashCustomer = new HashMap<>();
 
@@ -122,7 +112,8 @@ public class CustomerActivity extends AppCompatActivity implements CustomerView 
         listMain.setAdapter(customerAdapter);
         listMain.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
-            public void onScrollStateChanged(AbsListView view, int scrollState) { }
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+            }
 
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
@@ -204,7 +195,7 @@ public class CustomerActivity extends AppCompatActivity implements CustomerView 
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.logout:
-                editor = mLogin.edit();
+                SharedPreferences.Editor editor = mLogin.edit();
                 editor.remove("username");
                 editor.apply();
 

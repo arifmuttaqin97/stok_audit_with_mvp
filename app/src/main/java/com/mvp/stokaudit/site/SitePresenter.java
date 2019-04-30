@@ -24,7 +24,7 @@ class SitePresenter {
         this.siteView = siteView;
     }
 
-    public void getDataSite(Map<String, String> headerMap, HashMap<String, String> hashMap){
+    public void getDataSite(Map<String, String> headerMap, HashMap<String, String> hashMap) {
         RetrofitService retrofitService = RetrofitBuilder.getApi().create(RetrofitService.class);
         Call<ApiResponse> call = retrofitService.customerSite(headerMap, hashMap);
         call.enqueue(new Callback<ApiResponse>() {
@@ -54,7 +54,7 @@ class SitePresenter {
         });
     }
 
-    public void getMoreSite(Map<String, String> headerMap, HashMap<String, String> hashMap){
+    public void getMoreSite(Map<String, String> headerMap, HashMap<String, String> hashMap) {
         RetrofitService retrofitService = RetrofitBuilder.getApi().create(RetrofitService.class);
         Call<ApiResponse> call = retrofitService.customerSite(headerMap, hashMap);
         call.enqueue(new Callback<ApiResponse>() {

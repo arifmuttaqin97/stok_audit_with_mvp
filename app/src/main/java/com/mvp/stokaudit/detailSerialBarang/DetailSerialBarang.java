@@ -2,10 +2,10 @@ package com.mvp.stokaudit.detailSerialBarang;
 
 class DetailSerialBarang {
     String id_serial;
+    String serial;
     private String id_barang;
     private String id_lokasi;
     private String nama_barang;
-    String serial;
 
     public DetailSerialBarang(String id_serial, String id_barang, String id_lokasi, String nama_barang, String serial) {
         this.id_serial = id_serial;

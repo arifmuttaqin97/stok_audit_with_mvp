@@ -2,8 +2,8 @@ package com.mvp.stokaudit.site;
 
 class Site {
     String id_site;
-    private String service_id;
     String nama_site;
+    private String service_id;
     private String alamat_site;
     private String kota_site;
     private String telp_site;

@@ -5,10 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.Menu;
@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.internal.LinkedTreeMap;
+import com.mvp.stokaudit.GeneralFunction;
 import com.mvp.stokaudit.R;
 import com.mvp.stokaudit.listBarang.ListBarangActivity;
 
@@ -29,18 +30,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
-public class DetailBarangActivity extends AppCompatActivity implements DetailBarangView{
+public class DetailBarangActivity extends AppCompatActivity implements DetailBarangView {
 
     private final Map<String, String> headerMap = new HashMap<>();
     private final Integer count = 15;
     private final String SAVE = "log_save";
-    private TextView testSaved;
     private ListView listSaved;
-    private FloatingActionButton btnAdd;
     private ProgressBar progressBar;
-    private SharedPreferences mLogin;
     private String site;
     private String nama_site;
     private ArrayList<DetailBarang> arrayDetailBarang;
@@ -63,26 +60,29 @@ public class DetailBarangActivity extends AppCompatActivity implements DetailBar
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        testSaved = findViewById(R.id.textSaved);
+        TextView testSaved = findViewById(R.id.textSaved);
         listSaved = findViewById(R.id.listSaved);
-        btnAdd = findViewById(R.id.btnAdd);
+        FloatingActionButton btnAdd = findViewById(R.id.btnAdd);
         progressBar = findViewById(R.id.loading);
 
         detailBarangPresenter = new DetailBarangPresenter(this);
 
-        mLogin = getSharedPreferences("Login", Context.MODE_PRIVATE);
+        SharedPreferences mLogin = getSharedPreferences("Login", Context.MODE_PRIVATE);
 
-        if (mLogin.contains("username") && mLogin.contains("nik")) {
-            headerMap.put("User-Name", Objects.requireNonNull(mLogin.getString("username", "")));
-            headerMap.put("User-Id", Objects.requireNonNull(mLogin.getString("nik", "")));
-        } else {
-            headerMap.put("User-Name", "");
-            headerMap.put("User-Id", "");
-        }
+//        if (mLogin.contains("username") && mLogin.contains("nik")) {
+//            headerMap.put("User-Name", Objects.requireNonNull(mLogin.getString("username", "")));
+//            headerMap.put("User-Id", Objects.requireNonNull(mLogin.getString("nik", "")));
+//        } else {
+//            headerMap.put("User-Name", "");
+//            headerMap.put("User-Id", "");
+//        }
+//
+//        headerMap.put("Client-Service", "gmedia-stok-audit");
+//        headerMap.put("Auth-Key", "gmedia");
+//        headerMap.put("Content-Type", "application/json");
 
-        headerMap.put("Client-Service", "gmedia-stok-audit");
-        headerMap.put("Auth-Key", "gmedia");
-        headerMap.put("Content-Type", "application/json");
+        GeneralFunction generalFunction = new GeneralFunction();
+        generalFunction.getHeader(mLogin, headerMap);
 
         site = getIntent().getStringExtra("Site");
         nama_site = getIntent().getStringExtra("Nama_Site");
@@ -99,7 +99,7 @@ public class DetailBarangActivity extends AppCompatActivity implements DetailBar
         });
     }
 
-    private void getDetailBarang(final String search, final String params){
+    private void getDetailBarang(final String search, final String params) {
         arrayDetailBarang = new ArrayList<>();
         hashDetailBarang = new HashMap<>();
 
@@ -116,7 +116,7 @@ public class DetailBarangActivity extends AppCompatActivity implements DetailBar
         moreParams = params;
     }
 
-    private void getMore(String search, String params){
+    private void getMore(String search, String params) {
         arrayDetailBarang = new ArrayList<>();
         hashDetailBarang = new HashMap<>();
 

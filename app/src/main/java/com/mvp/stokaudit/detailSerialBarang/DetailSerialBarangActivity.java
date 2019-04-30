@@ -3,9 +3,9 @@ package com.mvp.stokaudit.detailSerialBarang;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,25 +16,23 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.internal.LinkedTreeMap;
+import com.mvp.stokaudit.GeneralFunction;
 import com.mvp.stokaudit.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 public class DetailSerialBarangActivity extends AppCompatActivity implements DetailSerialBarangView {
 
     private final Map<String, String> headerMap = new HashMap<>();
     private final Integer count = 15;
     private final String SERIAL = "log_serial";
-    private TextView namaBarang;
     private ListView listSerial;
     private ProgressBar progressBar;
     private String id_lokasi;
     private String id_barang;
-    private SharedPreferences mLogin;
     private ArrayList<DetailSerialBarang> arraySerial;
     private HashMap<String, String> hashSerial;
     private DetailSerialBarang serial;
@@ -52,7 +50,7 @@ public class DetailSerialBarangActivity extends AppCompatActivity implements Det
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        namaBarang = findViewById(R.id.testNamaBarang);
+        TextView namaBarang = findViewById(R.id.testNamaBarang);
         listSerial = findViewById(R.id.listSerial);
         progressBar = findViewById(R.id.loading);
 
@@ -62,22 +60,25 @@ public class DetailSerialBarangActivity extends AppCompatActivity implements Det
         id_lokasi = getIntent().getStringExtra("id_lokasi");
         id_barang = getIntent().getStringExtra("id_barang");
 
-        mLogin = getSharedPreferences("Login", Context.MODE_PRIVATE);
+        SharedPreferences mLogin = getSharedPreferences("Login", Context.MODE_PRIVATE);
 
-        if (mLogin.contains("username") && mLogin.contains("nik")) {
-            headerMap.put("User-Name", Objects.requireNonNull(mLogin.getString("username", "")));
-            headerMap.put("User-Id", Objects.requireNonNull(mLogin.getString("nik", "")));
-        } else {
-            headerMap.put("User-Name", "");
-            headerMap.put("User-Id", "");
-        }
+//        if (mLogin.contains("username") && mLogin.contains("nik")) {
+//            headerMap.put("User-Name", Objects.requireNonNull(mLogin.getString("username", "")));
+//            headerMap.put("User-Id", Objects.requireNonNull(mLogin.getString("nik", "")));
+//        } else {
+//            headerMap.put("User-Name", "");
+//            headerMap.put("User-Id", "");
+//        }
+//
+//        headerMap.put("Client-Service", "gmedia-stok-audit");
+//        headerMap.put("Auth-Key", "gmedia");
+//        headerMap.put("Content-Type", "application/json");
 
-        headerMap.put("Client-Service", "gmedia-stok-audit");
-        headerMap.put("Auth-Key", "gmedia");
-        headerMap.put("Content-Type", "application/json");
+        GeneralFunction generalFunction = new GeneralFunction();
+        generalFunction.getHeader(mLogin, headerMap);
     }
 
-    private void getSerial(){
+    private void getSerial() {
         arraySerial = new ArrayList<>();
         hashSerial = new HashMap<>();
 
@@ -91,7 +92,7 @@ public class DetailSerialBarangActivity extends AppCompatActivity implements Det
         detailSerialBarangPresenter.getDataDetailSerial(headerMap, hashSerial);
     }
 
-    private void getMore(){
+    private void getMore() {
         arraySerial = new ArrayList<>();
         hashSerial = new HashMap<>();
 
@@ -185,10 +186,9 @@ public class DetailSerialBarangActivity extends AppCompatActivity implements Det
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                onBackPressed();
-                return true;
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }

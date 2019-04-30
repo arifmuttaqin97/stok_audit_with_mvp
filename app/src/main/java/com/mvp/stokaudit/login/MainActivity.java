@@ -3,8 +3,8 @@ package com.mvp.stokaudit.login;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -12,8 +12,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.gson.internal.LinkedTreeMap;
-import com.mvp.stokaudit.customer.CustomerActivity;
 import com.mvp.stokaudit.R;
+import com.mvp.stokaudit.customer.CustomerActivity;
 
 import java.util.HashMap;
 
@@ -22,11 +22,7 @@ public class MainActivity extends AppCompatActivity implements LoginView {
     private final String LOGIN = "log_login";
     private EditText username;
     private EditText password;
-    private Button btnLogin;
-    private String tmpUser;
-    private String tmpPass;
     private SharedPreferences mLogin;
-    private SharedPreferences.Editor editor;
     private LoginPresenter loginPresenter;
 
     @Override
@@ -36,42 +32,48 @@ public class MainActivity extends AppCompatActivity implements LoginView {
 
         username = findViewById(R.id.userLogin);
         password = findViewById(R.id.passLogin);
-        btnLogin = findViewById(R.id.btnLogin);
+        Button btnLogin = findViewById(R.id.btnLogin);
 
         loginPresenter = new LoginPresenter(this);
-
-        final HashMap<String, String> loginHash = new HashMap<>();
 
 //        Inisialisasi Shared Preference
         mLogin = getSharedPreferences("Login", Context.MODE_PRIVATE);
 
-        if (mLogin.contains("username")) {
-            Intent i = new Intent(MainActivity.this, CustomerActivity.class);
-            startActivity(i);
-            finish();
-        }
+        loginPresenter.checkUsername(mLogin);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tmpUser = username.getText().toString();
-                tmpPass = password.getText().toString();
-
-                if (tmpUser.equals("") || tmpPass.equals("")) {
-                    Toast.makeText(MainActivity.this, "Silahkan masukkan username dan password", Toast.LENGTH_SHORT).show();
-                } else {
-                    loginHash.put("username", tmpUser);
-                    loginHash.put("password", tmpPass);
-
-                    loginPresenter.getDataLogin(loginHash);
-                }
+                loginPresenter.login(username, password);
             }
         });
     }
 
     @Override
+    public void userFound() {
+        Intent i = new Intent(MainActivity.this, CustomerActivity.class);
+        startActivity(i);
+        finish();
+    }
+
+    @Override
+    public void emptyField() {
+        Toast.makeText(MainActivity.this, "Silahkan masukkan username dan password", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void login(String user, String pass) {
+        HashMap<String, String> loginHash = new HashMap<>();
+
+        loginHash.put("username", user);
+        loginHash.put("password", pass);
+
+        loginPresenter.getDataLogin(loginHash);
+    }
+
+    @Override
     public void getDataLogin(LinkedTreeMap linkedTreeMap) {
-        editor = mLogin.edit();
+        SharedPreferences.Editor editor = mLogin.edit();
         editor.putString("username", (String) linkedTreeMap.get("username"));
         editor.putString("nik", (String) linkedTreeMap.get("nik"));
         editor.putString("nama", (String) linkedTreeMap.get("nama"));

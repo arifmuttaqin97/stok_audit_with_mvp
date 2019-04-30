@@ -13,10 +13,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-//import androidx.annotation.RequiresApi;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+//import androidx.annotation.RequiresApi;
 
 class DetailGambarSerialPresenter {
     private final DetailGambarSerialView detailGambarSerialView;
@@ -25,7 +26,7 @@ class DetailGambarSerialPresenter {
         this.detailGambarSerialView = detailGambarSerialView;
     }
 
-    public void getDataSite(Map<String, String> headerMap, HashMap<String, String> hashMap){
+    public void getDataSite(Map<String, String> headerMap, HashMap<String, String> hashMap) {
         RetrofitService retrofitService = RetrofitBuilder.getApi().create(RetrofitService.class);
         Call<ApiResponse> call = retrofitService.detailGambar(headerMap, hashMap);
         call.enqueue(new Callback<ApiResponse>() {

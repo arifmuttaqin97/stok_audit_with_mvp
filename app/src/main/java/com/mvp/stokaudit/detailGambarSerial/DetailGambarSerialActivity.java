@@ -3,9 +3,9 @@ package com.mvp.stokaudit.detailGambarSerial;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -14,12 +14,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.internal.LinkedTreeMap;
+import com.mvp.stokaudit.GeneralFunction;
 import com.mvp.stokaudit.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 //import androidx.annotation.RequiresApi;
 
@@ -30,10 +30,6 @@ public class DetailGambarSerialActivity extends AppCompatActivity implements Det
     private final String GAMBAR = "log_detailGambar";
     private TextView detailGambar;
     private RecyclerView rvGambar;
-    private SharedPreferences mLogin;
-    private String id_serial;
-    private DetailGambarSerialAdapter detailGambarAdapter;
-    private DetailGambarSerialPresenter detailGambarSerialPresenter;
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
@@ -48,23 +44,26 @@ public class DetailGambarSerialActivity extends AppCompatActivity implements Det
         detailGambar = findViewById(R.id.testDetailGambar);
         rvGambar = findViewById(R.id.rvGambar);
 
-        detailGambarSerialPresenter = new DetailGambarSerialPresenter(this);
+        DetailGambarSerialPresenter detailGambarSerialPresenter = new DetailGambarSerialPresenter(this);
 
-        mLogin = getSharedPreferences("Login", Context.MODE_PRIVATE);
+        SharedPreferences mLogin = getSharedPreferences("Login", Context.MODE_PRIVATE);
 
-        if (mLogin.contains("username") && mLogin.contains("nik")) {
-            headerMap.put("User-Name", Objects.requireNonNull(mLogin.getString("username", "")));
-            headerMap.put("User-Id", Objects.requireNonNull(mLogin.getString("nik", "")));
-        } else {
-            headerMap.put("User-Name", "");
-            headerMap.put("User-Id", "");
-        }
+//        if (mLogin.contains("username") && mLogin.contains("nik")) {
+//            headerMap.put("User-Name", Objects.requireNonNull(mLogin.getString("username", "")));
+//            headerMap.put("User-Id", Objects.requireNonNull(mLogin.getString("nik", "")));
+//        } else {
+//            headerMap.put("User-Name", "");
+//            headerMap.put("User-Id", "");
+//        }
+//
+//        headerMap.put("Client-Service", "gmedia-stok-audit");
+//        headerMap.put("Auth-Key", "gmedia");
+//        headerMap.put("Content-Type", "application/json");
 
-        headerMap.put("Client-Service", "gmedia-stok-audit");
-        headerMap.put("Auth-Key", "gmedia");
-        headerMap.put("Content-Type", "application/json");
+        GeneralFunction generalFunction = new GeneralFunction();
+        generalFunction.getHeader(mLogin, headerMap);
 
-        id_serial = getIntent().getStringExtra("id_serial");
+        String id_serial = getIntent().getStringExtra("id_serial");
 
         hashMap.put("id_serial", id_serial);
 
@@ -88,7 +87,7 @@ public class DetailGambarSerialActivity extends AppCompatActivity implements Det
             String tmpGambar = (String) linkedTreeMap1.get("image");
             arrayList1.add(tmpGambar);
         }
-        detailGambarAdapter = new DetailGambarSerialAdapter(arrayList1);
+        DetailGambarSerialAdapter detailGambarAdapter = new DetailGambarSerialAdapter(arrayList1);
         rvGambar.setAdapter(detailGambarAdapter);
     }
 
@@ -111,10 +110,9 @@ public class DetailGambarSerialActivity extends AppCompatActivity implements Det
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                onBackPressed();
-                return true;
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
