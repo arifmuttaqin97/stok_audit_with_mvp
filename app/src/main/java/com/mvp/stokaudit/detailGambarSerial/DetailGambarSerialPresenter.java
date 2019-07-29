@@ -22,11 +22,11 @@ import retrofit2.Response;
 class DetailGambarSerialPresenter {
     private final DetailGambarSerialView detailGambarSerialView;
 
-    public DetailGambarSerialPresenter(DetailGambarSerialView detailGambarSerialView) {
+    DetailGambarSerialPresenter(DetailGambarSerialView detailGambarSerialView) {
         this.detailGambarSerialView = detailGambarSerialView;
     }
 
-    public void getDataSite(Map<String, String> headerMap, HashMap<String, String> hashMap) {
+    void getDataSite(Map<String, String> headerMap, HashMap<String, String> hashMap) {
         RetrofitService retrofitService = RetrofitBuilder.getApi().create(RetrofitService.class);
         Call<ApiResponse> call = retrofitService.detailGambar(headerMap, hashMap);
         call.enqueue(new Callback<ApiResponse>() {

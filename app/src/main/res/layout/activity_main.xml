@@ -64,7 +64,8 @@
                 android:inputType="text"
                 android:singleLine="true"
                 android:textColor="@android:color/white"
-                android:textColorHint="@android:color/white" />
+                android:textColorHint="@android:color/white"
+                android:importantForAutofill="no" />
 
         </android.support.design.widget.TextInputLayout>
 
@@ -108,7 +109,8 @@
                 android:inputType="textPassword"
                 android:singleLine="true"
                 android:textColor="@android:color/white"
-                android:textColorHint="@android:color/white" />
+                android:textColorHint="@android:color/white"
+                android:importantForAutofill="no" />
 
         </android.support.design.widget.TextInputLayout>
 

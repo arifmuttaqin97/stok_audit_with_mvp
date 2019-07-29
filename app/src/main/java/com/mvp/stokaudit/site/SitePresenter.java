@@ -20,11 +20,11 @@ import retrofit2.Response;
 class SitePresenter {
     private final SiteView siteView;
 
-    public SitePresenter(SiteView siteView) {
+    SitePresenter(SiteView siteView) {
         this.siteView = siteView;
     }
 
-    public void getDataSite(Map<String, String> headerMap, HashMap<String, String> hashMap) {
+    void getDataSite(Map<String, String> headerMap, HashMap<String, String> hashMap) {
         RetrofitService retrofitService = RetrofitBuilder.getApi().create(RetrofitService.class);
         Call<ApiResponse> call = retrofitService.customerSite(headerMap, hashMap);
         call.enqueue(new Callback<ApiResponse>() {
@@ -54,7 +54,7 @@ class SitePresenter {
         });
     }
 
-    public void getMoreSite(Map<String, String> headerMap, HashMap<String, String> hashMap) {
+    void getMoreSite(Map<String, String> headerMap, HashMap<String, String> hashMap) {
         RetrofitService retrofitService = RetrofitBuilder.getApi().create(RetrofitService.class);
         Call<ApiResponse> call = retrofitService.customerSite(headerMap, hashMap);
         call.enqueue(new Callback<ApiResponse>() {

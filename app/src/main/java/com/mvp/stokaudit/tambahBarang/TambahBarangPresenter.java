@@ -34,7 +34,7 @@ import retrofit2.Response;
 class TambahBarangPresenter {
     private final TambahBarangView tambahBarangView;
 
-    public TambahBarangPresenter(TambahBarangView tambahBarangView) {
+    TambahBarangPresenter(TambahBarangView tambahBarangView) {
         this.tambahBarangView = tambahBarangView;
     }
 
@@ -55,7 +55,7 @@ class TambahBarangPresenter {
         return Bitmap.createScaledBitmap(image, width, height, true);
     }
 
-    public void addBarang(Map<String, String> headerMap, HashMap<String, Object> hashMap) {
+    void addBarang(Map<String, String> headerMap, HashMap<String, Object> hashMap) {
         RetrofitService retrofitService = RetrofitBuilder.getApi().create(RetrofitService.class);
         Call<ApiResponse> call = retrofitService.tambahBarang(headerMap, hashMap);
         call.enqueue(new Callback<ApiResponse>() {
@@ -78,7 +78,7 @@ class TambahBarangPresenter {
         });
     }
 
-    public void picture(Context context, @Nullable Intent data, String kodeBarang, Map<String, String> headerMap) {
+    void picture(Context context, @Nullable Intent data, String kodeBarang, Map<String, String> headerMap) {
         try {
             assert data != null;
             Bitmap bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), Uri.fromFile(new File(data.getStringArrayListExtra(Pix.IMAGE_RESULTS).get(0))));

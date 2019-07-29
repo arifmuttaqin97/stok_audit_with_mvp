@@ -21,11 +21,11 @@ class DetailSerialBarangPresenter {
 
     private final DetailSerialBarangView detailSerialBarangView;
 
-    public DetailSerialBarangPresenter(DetailSerialBarangView detailSerialBarangView) {
+    DetailSerialBarangPresenter(DetailSerialBarangView detailSerialBarangView) {
         this.detailSerialBarangView = detailSerialBarangView;
     }
 
-    public void getDataDetailSerial(Map<String, String> headerMap, HashMap<String, String> hashMap) {
+    void getDataDetailSerial(Map<String, String> headerMap, HashMap<String, String> hashMap) {
         RetrofitService retrofitService = RetrofitBuilder.getApi().create(RetrofitService.class);
         Call<ApiResponse> call = retrofitService.detailSerial(headerMap, hashMap);
         call.enqueue(new Callback<ApiResponse>() {
@@ -55,7 +55,7 @@ class DetailSerialBarangPresenter {
         });
     }
 
-    public void getMoreDetailSerial(Map<String, String> headerMap, HashMap<String, String> hashMap) {
+    void getMoreDetailSerial(Map<String, String> headerMap, HashMap<String, String> hashMap) {
         RetrofitService retrofitService = RetrofitBuilder.getApi().create(RetrofitService.class);
         Call<ApiResponse> call = retrofitService.detailSerial(headerMap, hashMap);
         call.enqueue(new Callback<ApiResponse>() {

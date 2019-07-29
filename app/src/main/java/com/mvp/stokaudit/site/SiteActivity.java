@@ -13,6 +13,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AbsListView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -54,6 +56,13 @@ public class SiteActivity extends AppCompatActivity implements SiteView {
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
+        if (android.os.Build.VERSION.SDK_INT >= 21) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.setStatusBarColor(getResources().getColor(R.color.colorPrimary));
         }
 
         TextView testSite = findViewById(R.id.textSite);
@@ -163,6 +172,12 @@ public class SiteActivity extends AppCompatActivity implements SiteView {
 
     @Override
     public void wrongResponse(String string) {
+        arrayCustomerSite.clear();
+
+        listSite.setAdapter(null);
+        siteAdapter = new SiteAdapter(SiteActivity.this, arrayCustomerSite);
+        listSite.setAdapter(siteAdapter);
+
         Toast.makeText(SiteActivity.this, string, Toast.LENGTH_SHORT).show();
         Log.d(SITE, string);
     }

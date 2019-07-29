@@ -14,6 +14,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AbsListView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -54,6 +56,13 @@ public class CustomerActivity extends AppCompatActivity implements CustomerView 
 
         listMain = findViewById(R.id.listCustomer);
         progressBar = findViewById(R.id.loading);
+
+        if (android.os.Build.VERSION.SDK_INT >= 21) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.setStatusBarColor(getResources().getColor(R.color.colorPrimary));
+        }
 
         customerPresenter = new CustomerPresenter(this);
 
@@ -133,6 +142,12 @@ public class CustomerActivity extends AppCompatActivity implements CustomerView 
 
     @Override
     public void wrongResponse(String string) {
+        arrayCustomer.clear();
+
+        listMain.setAdapter(null);
+        customerAdapter = new CustomerAdapter(CustomerActivity.this, arrayCustomer);
+        listMain.setAdapter(customerAdapter);
+
         Toast.makeText(CustomerActivity.this, string, Toast.LENGTH_SHORT).show();
         Log.d(CUSTOMER, string);
     }

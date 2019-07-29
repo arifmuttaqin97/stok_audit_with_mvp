@@ -20,11 +20,11 @@ import retrofit2.Response;
 class CustomerPresenter {
     private final CustomerView customerView;
 
-    public CustomerPresenter(CustomerView customerView) {
+    CustomerPresenter(CustomerView customerView) {
         this.customerView = customerView;
     }
 
-    public void getDataCustomer(Map<String, String> headerMap, HashMap<String, String> hashMap) {
+    void getDataCustomer(Map<String, String> headerMap, HashMap<String, String> hashMap) {
         RetrofitService retrofitService = RetrofitBuilder.getApi().create(RetrofitService.class);
         Call<ApiResponse> call = retrofitService.customer(headerMap, hashMap);
         call.enqueue(new Callback<ApiResponse>() {
@@ -54,7 +54,7 @@ class CustomerPresenter {
         });
     }
 
-    public void getMoreCustomer(Map<String, String> headerMap, HashMap<String, String> hashMap) {
+    void getMoreCustomer(Map<String, String> headerMap, HashMap<String, String> hashMap) {
         RetrofitService retrofitService = RetrofitBuilder.getApi().create(RetrofitService.class);
         Call<ApiResponse> call = retrofitService.customer(headerMap, hashMap);
         call.enqueue(new Callback<ApiResponse>() {

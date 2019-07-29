@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="10dp"
-        android:text="Nama Barang" />
+        android:text="@string/nama_barang" />
 
     <TextView
         android:id="@+id/ketGambar"
@@ -21,7 +21,7 @@
         android:layout_below="@id/testDetailGambar"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="10dp"
-        android:text="Geser untuk melihat gambar lainnya" />
+        android:text="@string/geser_untuk_melihat_gambar_lainnya" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvGambar"

@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="10dp"
-        android:text="Nama Barang" />
+        android:text="@string/nama_barang" />
 
     <TextView
         android:id="@+id/ketGambar"
@@ -22,7 +22,7 @@
         android:layout_below="@id/testDataBarang"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="10dp"
-        android:text="Geser untuk melihat gambar lainnya" />
+        android:text="@string/geser_untuk_melihat_gambar_lainnya" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvGambar"
@@ -40,7 +40,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Kode barcode : " />
+            android:text="@string/kode_barcode" />
 
         <TextView
             android:id="@+id/testBarcode"
@@ -71,7 +71,8 @@
                 android:layout_centerVertical="true"
                 android:layout_marginStart="50dp"
                 android:layout_marginLeft="50dp"
-                android:src="@drawable/photo_camera" />
+                android:src="@drawable/photo_camera"
+                android:contentDescription="@string/upload_foto" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -80,7 +81,7 @@
                 android:layout_margin="20dp"
                 android:layout_toEndOf="@id/logoFoto"
                 android:layout_toRightOf="@id/logoFoto"
-                android:text="Upload Foto" />
+                android:text="@string/upload_foto" />
         </RelativeLayout>
     </android.support.v7.widget.CardView>
 
@@ -106,7 +107,8 @@
                 android:layout_centerVertical="true"
                 android:layout_marginStart="50dp"
                 android:layout_marginLeft="50dp"
-                android:src="@drawable/barcode" />
+                android:src="@drawable/barcode"
+                android:contentDescription="@string/upload_barcode" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -115,7 +117,7 @@
                 android:layout_margin="20dp"
                 android:layout_toEndOf="@id/logoBarcode"
                 android:layout_toRightOf="@id/logoBarcode"
-                android:text="Upload Barcode" />
+                android:text="@string/upload_barcode" />
         </RelativeLayout>
     </android.support.v7.widget.CardView>
 
@@ -127,6 +129,6 @@
         android:layout_centerHorizontal="true"
         android:layout_margin="10dp"
         android:background="@drawable/button_orange"
-        android:text="Save"
+        android:text="@string/save"
         android:textColor="@android:color/white" />
 </RelativeLayout>

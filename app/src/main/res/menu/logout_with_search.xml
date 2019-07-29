@@ -5,12 +5,12 @@
         android:id="@+id/action_search"
         android:icon="@drawable/ic_search_black"
         android:orderInCategory="100"
-        android:title="Search"
+        android:title="@string/search"
         app:actionViewClass="android.support.v7.widget.SearchView"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/logout"
         android:orderInCategory="100"
-        android:title="Logout"
+        android:title="@string/logout"
         app:showAsAction="collapseActionView" />
 </menu><!--android:iconifiedByDefault="false"-->

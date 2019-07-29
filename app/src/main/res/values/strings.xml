@@ -7,4 +7,15 @@
     <string name="gmedia_stok_audit">GMEDIA STOK AUDIT</string>
     <string name="search">Search</string>
     <string name="search_hint">Search…</string>
+    <string name="nama_barang">Nama Barang</string>
+    <string name="geser_untuk_melihat_gambar_lainnya">Geser untuk melihat gambar lainnya</string>
+    <string name="daftar_serial_barcode">Daftar serial/barcode :</string>
+    <string name="daftar_barang_di_gmedia">Daftar Barang di Gmedia</string>
+    <string name="upload_barcode">Upload Barcode</string>
+    <string name="upload_foto">Upload Foto</string>
+    <string name="kode_barcode">Kode barcode :</string>
+    <string name="save">Save</string>
+    <string name="gambar">Gambar</string>
+    <string name="logout">Logout</string>
+    <string name="logo_bangunan">Logo bangunan</string>
 </resources>

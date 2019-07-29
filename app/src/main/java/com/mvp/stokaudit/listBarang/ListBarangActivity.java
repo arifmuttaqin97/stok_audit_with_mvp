@@ -13,6 +13,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AbsListView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -53,6 +55,13 @@ public class ListBarangActivity extends AppCompatActivity implements ListBarangV
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
+        if (android.os.Build.VERSION.SDK_INT >= 21) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.setStatusBarColor(getResources().getColor(R.color.colorPrimary));
         }
 
         listMaster = findViewById(R.id.listMaster);
@@ -172,6 +181,12 @@ public class ListBarangActivity extends AppCompatActivity implements ListBarangV
 
     @Override
     public void wrongResponse(String string) {
+        arrayListBarang.clear();
+
+        listMaster.setAdapter(null);
+        listBarangAdapter = new ListBarangAdapter(ListBarangActivity.this, arrayListBarang, id_lokasi, nama_site);
+        listMaster.setAdapter(listBarangAdapter);
+
         Toast.makeText(ListBarangActivity.this, string, Toast.LENGTH_SHORT).show();
         Log.d(MASTER, string);
     }

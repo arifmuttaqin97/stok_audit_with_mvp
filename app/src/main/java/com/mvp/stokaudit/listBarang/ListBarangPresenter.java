@@ -20,11 +20,11 @@ import retrofit2.Response;
 class ListBarangPresenter {
     private final ListBarangView listBarangView;
 
-    public ListBarangPresenter(ListBarangView listBarangView) {
+    ListBarangPresenter(ListBarangView listBarangView) {
         this.listBarangView = listBarangView;
     }
 
-    public void getDataMaster(Map<String, String> headerMap, HashMap<String, String> hashMap) {
+    void getDataMaster(Map<String, String> headerMap, HashMap<String, String> hashMap) {
         RetrofitService retrofitService = RetrofitBuilder.getApi().create(RetrofitService.class);
         Call<ApiResponse> call = retrofitService.listBarang(headerMap, hashMap);
         call.enqueue(new Callback<ApiResponse>() {
@@ -54,7 +54,7 @@ class ListBarangPresenter {
         });
     }
 
-    public void getMoreMaster(Map<String, String> headerMap, HashMap<String, String> hashMap) {
+    void getMoreMaster(Map<String, String> headerMap, HashMap<String, String> hashMap) {
         RetrofitService retrofitService = RetrofitBuilder.getApi().create(RetrofitService.class);
         Call<ApiResponse> call = retrofitService.listBarang(headerMap, hashMap);
         call.enqueue(new Callback<ApiResponse>() {

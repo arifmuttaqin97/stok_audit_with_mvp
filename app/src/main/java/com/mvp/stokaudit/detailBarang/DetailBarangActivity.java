@@ -1,6 +1,6 @@
 package com.mvp.stokaudit.detailBarang;
 
-import android.app.SearchManager;
+//import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,12 +9,14 @@ import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.SearchView;
+//import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AbsListView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -48,7 +50,7 @@ public class DetailBarangActivity extends AppCompatActivity implements DetailBar
     private DetailBarangPresenter detailBarangPresenter;
     private String moreSearch;
     private String moreParams;
-    private SearchView searchView;
+//    private SearchView searchView;
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
@@ -58,6 +60,13 @@ public class DetailBarangActivity extends AppCompatActivity implements DetailBar
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
+        if (android.os.Build.VERSION.SDK_INT >= 21) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.setStatusBarColor(getResources().getColor(R.color.colorPrimary));
         }
 
         TextView testSaved = findViewById(R.id.textSaved);
@@ -175,6 +184,12 @@ public class DetailBarangActivity extends AppCompatActivity implements DetailBar
 
     @Override
     public void wrongResponse(String string) {
+        arrayDetailBarang.clear();
+
+        listSaved.setAdapter(null);
+        detailBarangAdapter = new DetailBarangAdapter(DetailBarangActivity.this, arrayDetailBarang);
+        listSaved.setAdapter(detailBarangAdapter);
+
         Toast.makeText(DetailBarangActivity.this, string, Toast.LENGTH_SHORT).show();
         Log.d(SAVE, string);
     }
@@ -211,42 +226,51 @@ public class DetailBarangActivity extends AppCompatActivity implements DetailBar
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.search, menu);
 
-        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        searchView = (SearchView) menu.findItem(R.id.action_search)
-                .getActionView();
-        searchView.setSearchableInfo(searchManager
-                .getSearchableInfo(getComponentName()));
-        searchView.setMaxWidth(Integer.MAX_VALUE);
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String s) {
-                getDetailBarang(s, site);
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String s) {
-                getDetailBarang(s, site);
-                return false;
-            }
-        });
+//        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+//        searchView = (SearchView) menu.findItem(R.id.action_search)
+//                .getActionView();
+//        searchView.setSearchableInfo(searchManager
+//                .getSearchableInfo(getComponentName()));
+//        searchView.setMaxWidth(Integer.MAX_VALUE);
+//
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String s) {
+//                getDetailBarang(s, site);
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String s) {
+//                getDetailBarang(s, site);
+//                return false;
+//            }
+//        });
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                onBackPressed();
-                return true;
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+            return true;
 
-            case R.id.action_search:
-                return true;
-
-            default:
-                return super.onOptionsItemSelected(item);
+//            case R.id.action_search:
+//                return true;
         }
+        return super.onOptionsItemSelected(item);
+
+//        switch (item.getItemId()) {
+//            case android.R.id.home:
+//                onBackPressed();
+//                return true;
+//
+//            case R.id.action_search:
+//                return true;
+//
+//            default:
+//                return super.onOptionsItemSelected(item);
+//        }
     }
 
     @Override
@@ -257,10 +281,10 @@ public class DetailBarangActivity extends AppCompatActivity implements DetailBar
 
     @Override
     public void onBackPressed() {
-        if (!searchView.isIconified()) {
-            searchView.setIconified(true);
-            return;
-        }
+//        if (!searchView.isIconified()) {
+//            searchView.setIconified(true);
+//            return;
+//        }
         super.onBackPressed();
     }
 }
