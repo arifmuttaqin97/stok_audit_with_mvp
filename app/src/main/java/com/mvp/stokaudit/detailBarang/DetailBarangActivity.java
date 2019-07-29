@@ -221,11 +221,11 @@ public class DetailBarangActivity extends AppCompatActivity implements DetailBar
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.search, menu);
-
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        MenuInflater menuInflater = getMenuInflater();
+//        menuInflater.inflate(R.menu.search, menu);
+//
 //        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
 //        searchView = (SearchView) menu.findItem(R.id.action_search)
 //                .getActionView();
@@ -246,8 +246,8 @@ public class DetailBarangActivity extends AppCompatActivity implements DetailBar
 //                return false;
 //            }
 //        });
-        return super.onCreateOptionsMenu(menu);
-    }
+//        return super.onCreateOptionsMenu(menu);
+//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
