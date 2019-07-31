@@ -93,8 +93,9 @@ public class DetailGambarSerialActivity extends AppCompatActivity implements Det
 
         for (Object object : arrayList) {
             LinkedTreeMap linkedTreeMap1 = (LinkedTreeMap) object;
-            String tmpGambar = (String) linkedTreeMap1.get("image");
-            arrayList1.add(tmpGambar);
+            DetailGambarSerialModel model = new DetailGambarSerialModel((String) linkedTreeMap1.get("image"));
+//            String tmpGambar = (String) linkedTreeMap1.get("image");
+            arrayList1.add(model.image);
         }
         DetailGambarSerialAdapter detailGambarAdapter = new DetailGambarSerialAdapter(arrayList1);
         rvGambar.setAdapter(detailGambarAdapter);
