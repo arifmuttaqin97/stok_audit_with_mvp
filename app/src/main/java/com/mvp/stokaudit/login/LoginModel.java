@@ -1,14 +1,12 @@
-package com.mvp.stokaudit.customer;
+package com.mvp.stokaudit.login;
 
-class Customer {
-    String customer_id;
-    String customer_name;
-    private String alamat;
+class LoginModel {
+    String username;
+    String password;
 
-    Customer(String customer_id, String customer_name, String alamat) {
-        this.customer_id = customer_id;
-        this.customer_name = customer_name;
-        this.alamat = alamat;
+    LoginModel(String username, String password) {
+        this.username = username;
+        this.password = password;
     }
 
 //    public String getCustomer_id() {

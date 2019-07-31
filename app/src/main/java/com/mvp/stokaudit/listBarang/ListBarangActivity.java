@@ -38,9 +38,9 @@ public class ListBarangActivity extends AppCompatActivity implements ListBarangV
     private ProgressBar progressBar;
     private String id_lokasi = "";
     private String nama_site = "";
-    private ArrayList<ListBarang> arrayListBarang;
+    private ArrayList<ListBarangModel> arrayListBarang;
     private HashMap<String, String> hashListBarang;
-    private ListBarang listBarang;
+    private ListBarangModel listBarang;
     private ListBarangAdapter listBarangAdapter;
     private Integer startIndex = 0;
     private ListBarangPresenter listBarangPresenter;
@@ -128,7 +128,7 @@ public class ListBarangActivity extends AppCompatActivity implements ListBarangV
         for (Object object : list) {
             LinkedTreeMap linkedTreeMap = (LinkedTreeMap) object;
 
-            listBarang = new ListBarang(
+            listBarang = new ListBarangModel(
                     (String) linkedTreeMap.get("id_header"),
                     (String) linkedTreeMap.get("nama_barang"),
                     (String) linkedTreeMap.get("merk"),
@@ -201,7 +201,7 @@ public class ListBarangActivity extends AppCompatActivity implements ListBarangV
         for (Object object : list) {
             LinkedTreeMap linkedTreeMap = (LinkedTreeMap) object;
 
-            listBarang = new ListBarang(
+            listBarang = new ListBarangModel(
                     (String) linkedTreeMap.get("id_header"),
                     (String) linkedTreeMap.get("nama_barang"),
                     (String) linkedTreeMap.get("merk"),

@@ -31,14 +31,12 @@ class LoginPresenter {
         }
     }
 
-    void login(EditText username, EditText password) {
-        String tmpUser = username.getText().toString();
-        String tmpPass = password.getText().toString();
+    void login(String username, String password) {
 
-        if (tmpUser.equals("") || tmpPass.equals("")) {
+        if (username.equals("") || password.equals("")) {
             loginView.emptyField();
         } else {
-            loginView.login(tmpUser, tmpPass);
+            loginView.login(username, password);
         }
     }
 

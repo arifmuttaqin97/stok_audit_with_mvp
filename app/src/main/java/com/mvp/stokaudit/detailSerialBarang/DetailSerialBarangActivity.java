@@ -35,9 +35,9 @@ public class DetailSerialBarangActivity extends AppCompatActivity implements Det
     private ProgressBar progressBar;
     private String id_lokasi;
     private String id_barang;
-    private ArrayList<DetailSerialBarang> arraySerial;
+    private ArrayList<DetailSerialBarangModel> arraySerial;
     private HashMap<String, String> hashSerial;
-    private DetailSerialBarang serial;
+    private DetailSerialBarangModel serial;
     private DetailSerialBarangAdapter serialAdapter;
     private Integer startIndex = 0;
     private DetailSerialBarangPresenter detailSerialBarangPresenter;
@@ -125,7 +125,7 @@ public class DetailSerialBarangActivity extends AppCompatActivity implements Det
         for (Object object : list) {
             LinkedTreeMap linkedTreeMap = (LinkedTreeMap) object;
 
-            serial = new DetailSerialBarang(
+            serial = new DetailSerialBarangModel(
                     (String) linkedTreeMap.get("id_serial"),
                     (String) linkedTreeMap.get("id_barang"),
                     (String) linkedTreeMap.get("id_lokasi"),
@@ -175,7 +175,7 @@ public class DetailSerialBarangActivity extends AppCompatActivity implements Det
         for (Object object : list) {
             LinkedTreeMap linkedTreeMap = (LinkedTreeMap) object;
 
-            serial = new DetailSerialBarang(
+            serial = new DetailSerialBarangModel(
                     (String) linkedTreeMap.get("id_serial"),
                     (String) linkedTreeMap.get("id_barang"),
                     (String) linkedTreeMap.get("id_lokasi"),

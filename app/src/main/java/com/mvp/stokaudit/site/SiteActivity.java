@@ -38,9 +38,9 @@ public class SiteActivity extends AppCompatActivity implements SiteView {
     private ListView listSite;
     private ProgressBar progressBar;
     private String customer;
-    private ArrayList<Site> arrayCustomerSite;
+    private ArrayList<SiteModel> arrayCustomerSite;
     private HashMap<String, String> hashCustomerSite;
-    private Site site;
+    private SiteModel site;
     private SiteAdapter siteAdapter;
     private Integer startIndex = 0;
     private SitePresenter sitePresenter;
@@ -135,7 +135,7 @@ public class SiteActivity extends AppCompatActivity implements SiteView {
         for (Object object : list) {
             LinkedTreeMap linkedTreeMap = (LinkedTreeMap) object;
 
-            site = new Site(
+            site = new SiteModel(
                     (String) linkedTreeMap.get("id_site"),
                     (String) linkedTreeMap.get("service_id"),
                     (String) linkedTreeMap.get("nama_site"),
@@ -192,7 +192,7 @@ public class SiteActivity extends AppCompatActivity implements SiteView {
         for (Object object : list) {
             LinkedTreeMap linkedTreeMap = (LinkedTreeMap) object;
 
-            site = new Site(
+            site = new SiteModel(
                     (String) linkedTreeMap.get("id_site"),
                     (String) linkedTreeMap.get("service_id"),
                     (String) linkedTreeMap.get("nama_site"),
@@ -206,7 +206,7 @@ public class SiteActivity extends AppCompatActivity implements SiteView {
         if (siteAdapter != null) {
             siteAdapter.addMore(arrayCustomerSite);
         } else {
-            Log.d(SITE, "Site Adapter null");
+            Log.d(SITE, "SiteModel Adapter null");
             Toast.makeText(SiteActivity.this, "Terjadi kesalahan", Toast.LENGTH_SHORT).show();
         }
     }

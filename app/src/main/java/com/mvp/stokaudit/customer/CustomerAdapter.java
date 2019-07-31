@@ -16,9 +16,9 @@ import java.util.List;
 class CustomerAdapter extends BaseAdapter {
 
     private final Context context;
-    private final List<Customer> customer;
+    private final List<CustomerModel> customer;
 
-    CustomerAdapter(Context context, List<Customer> customer) {
+    CustomerAdapter(Context context, List<CustomerModel> customer) {
         this.context = context;
         this.customer = customer;
     }
@@ -46,7 +46,7 @@ class CustomerAdapter extends BaseAdapter {
 
         TextView textView = convertView.findViewById(R.id.textModel);
 
-        final Customer customerResponseData = customer.get(position);
+        final CustomerModel customerResponseData = customer.get(position);
         textView.setText(customerResponseData.customer_name);
 
         convertView.setOnClickListener(new View.OnClickListener() {
@@ -62,7 +62,7 @@ class CustomerAdapter extends BaseAdapter {
         return convertView;
     }
 
-    void addMore(List<Customer> moreData) {
+    void addMore(List<CustomerModel> moreData) {
         customer.addAll(moreData);
         notifyDataSetChanged();
     }

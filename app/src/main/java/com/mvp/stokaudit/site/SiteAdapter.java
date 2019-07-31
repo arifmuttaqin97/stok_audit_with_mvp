@@ -16,9 +16,9 @@ import java.util.List;
 class SiteAdapter extends BaseAdapter {
 
     private final Context context;
-    private final List<Site> customer;
+    private final List<SiteModel> customer;
 
-    SiteAdapter(Context context, List<Site> customer) {
+    SiteAdapter(Context context, List<SiteModel> customer) {
         this.context = context;
         this.customer = customer;
     }
@@ -46,7 +46,7 @@ class SiteAdapter extends BaseAdapter {
 
         TextView textView = convertView.findViewById(R.id.textModel);
 
-        final Site siteResponseData = customer.get(position);
+        final SiteModel siteResponseData = customer.get(position);
         textView.setText(siteResponseData.nama_site);
 
         convertView.setOnClickListener(new View.OnClickListener() {
@@ -62,7 +62,7 @@ class SiteAdapter extends BaseAdapter {
         return convertView;
     }
 
-    void addMore(List<Site> moreData) {
+    void addMore(List<SiteModel> moreData) {
         customer.addAll(moreData);
         notifyDataSetChanged();
     }

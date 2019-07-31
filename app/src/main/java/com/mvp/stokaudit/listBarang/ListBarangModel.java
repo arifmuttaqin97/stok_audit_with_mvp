@@ -1,6 +1,6 @@
 package com.mvp.stokaudit.listBarang;
 
-class ListBarang {
+class ListBarangModel {
     String id_header;
     String nama_barang;
     private String merk;
@@ -24,16 +24,16 @@ class ListBarang {
     private String id_tipe;
     private String id_satuan_kecil;
 
-    ListBarang(String id_header, String nama_barang,
-               String merk, String type, String kode,
-               String id_ukuran, String qty, String qty_small,
-               String min_stock, String max_stock,
-               String harga_jual, String id_aktif,
-               String gambar, String keterangan,
-               String user_input, String tanggal_input,
-               String user_update, String tanggal_update,
-               String flag, String id_kategori,
-               String id_tipe, String id_satuan_kecil) {
+    ListBarangModel(String id_header, String nama_barang,
+                    String merk, String type, String kode,
+                    String id_ukuran, String qty, String qty_small,
+                    String min_stock, String max_stock,
+                    String harga_jual, String id_aktif,
+                    String gambar, String keterangan,
+                    String user_input, String tanggal_input,
+                    String user_update, String tanggal_update,
+                    String flag, String id_kategori,
+                    String id_tipe, String id_satuan_kecil) {
 
         this.id_header = id_header;
         this.nama_barang = nama_barang;

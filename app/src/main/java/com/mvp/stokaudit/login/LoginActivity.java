@@ -17,7 +17,7 @@ import com.mvp.stokaudit.customer.CustomerActivity;
 
 import java.util.HashMap;
 
-public class MainActivity extends AppCompatActivity implements LoginView {
+public class LoginActivity extends AppCompatActivity implements LoginView {
 
     private final String LOGIN = "log_login";
     private EditText username;
@@ -41,24 +41,26 @@ public class MainActivity extends AppCompatActivity implements LoginView {
 
         loginPresenter.checkUsername(mLogin);
 
+
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loginPresenter.login(username, password);
+                LoginModel login = new LoginModel(username.getText().toString(), password.getText().toString());
+                loginPresenter.login(login.username, login.password);
             }
         });
     }
 
     @Override
     public void userFound() {
-        Intent i = new Intent(MainActivity.this, CustomerActivity.class);
+        Intent i = new Intent(LoginActivity.this, CustomerActivity.class);
         startActivity(i);
         finish();
     }
 
     @Override
     public void emptyField() {
-        Toast.makeText(MainActivity.this, "Silahkan masukkan username dan password", Toast.LENGTH_SHORT).show();
+        Toast.makeText(LoginActivity.this, "Silahkan masukkan username dan password", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -79,20 +81,20 @@ public class MainActivity extends AppCompatActivity implements LoginView {
         editor.putString("nama", (String) linkedTreeMap.get("nama"));
         editor.apply();
 
-        Intent i = new Intent(MainActivity.this, CustomerActivity.class);
+        Intent i = new Intent(LoginActivity.this, CustomerActivity.class);
         startActivity(i);
         finish();
     }
 
     @Override
     public void wrongType(String string) {
-        Toast.makeText(MainActivity.this, "Terjadi kesalahan", Toast.LENGTH_SHORT).show();
+        Toast.makeText(LoginActivity.this, "Terjadi kesalahan", Toast.LENGTH_SHORT).show();
         Log.d(LOGIN, string);
     }
 
     @Override
     public void wrongResponse(String string) {
-        Toast.makeText(MainActivity.this, string, Toast.LENGTH_SHORT).show();
+        Toast.makeText(LoginActivity.this, string, Toast.LENGTH_SHORT).show();
         Log.d(LOGIN, string);
     }
 

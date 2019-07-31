@@ -11,8 +11,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 //import android.support.v7.widget.SearchView;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -42,9 +40,9 @@ public class DetailBarangActivity extends AppCompatActivity implements DetailBar
     private ProgressBar progressBar;
     private String site;
     private String nama_site;
-    private ArrayList<DetailBarang> arrayDetailBarang;
+    private ArrayList<DetailBarangModel> arrayDetailBarang;
     private HashMap<String, String> hashDetailBarang;
-    private DetailBarang detailBarang;
+    private DetailBarangModel detailBarang;
     private DetailBarangAdapter detailBarangAdapter;
     private Integer startIndex = 0;
     private DetailBarangPresenter detailBarangPresenter;
@@ -149,7 +147,7 @@ public class DetailBarangActivity extends AppCompatActivity implements DetailBar
         for (Object object : list) {
             LinkedTreeMap linkedTreeMap = (LinkedTreeMap) object;
 
-            detailBarang = new DetailBarang(
+            detailBarang = new DetailBarangModel(
                     (String) linkedTreeMap.get("id_barang"),
                     (String) linkedTreeMap.get("id_lokasi"),
                     (String) linkedTreeMap.get("nama_barang"),
@@ -204,7 +202,7 @@ public class DetailBarangActivity extends AppCompatActivity implements DetailBar
         for (Object object : list) {
             LinkedTreeMap linkedTreeMap = (LinkedTreeMap) object;
 
-            detailBarang = new DetailBarang(
+            detailBarang = new DetailBarangModel(
                     (String) linkedTreeMap.get("id_barang"),
                     (String) linkedTreeMap.get("id_lokasi"),
                     (String) linkedTreeMap.get("nama_barang"),

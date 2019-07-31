@@ -1,13 +1,13 @@
 package com.mvp.stokaudit.detailSerialBarang;
 
-class DetailSerialBarang {
+class DetailSerialBarangModel {
     String id_serial;
     String serial;
     private String id_barang;
     private String id_lokasi;
     private String nama_barang;
 
-    DetailSerialBarang(String id_serial, String id_barang, String id_lokasi, String nama_barang, String serial) {
+    DetailSerialBarangModel(String id_serial, String id_barang, String id_lokasi, String nama_barang, String serial) {
         this.id_serial = id_serial;
         this.id_barang = id_barang;
         this.id_lokasi = id_lokasi;

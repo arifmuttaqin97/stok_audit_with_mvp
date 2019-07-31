@@ -128,10 +128,12 @@ public class TambahBarangActivity extends AppCompatActivity implements TambahBar
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                hashTambahBarang.put("id_barang", kodeBarang);
-                hashTambahBarang.put("id_lokasi", id_lokasi);
-                hashTambahBarang.put("serial", barcodes);
-                hashTambahBarang.put("data_image", idResponse);
+                TambahBarangModel tambahBarangModel = new TambahBarangModel(kodeBarang, id_lokasi, barcodes, idResponse);
+
+                hashTambahBarang.put("id_barang", tambahBarangModel.id_barang);
+                hashTambahBarang.put("id_lokasi", tambahBarangModel.id_lokasi);
+                hashTambahBarang.put("serial", tambahBarangModel.serial);
+                hashTambahBarang.put("data_image", tambahBarangModel.data_image);
 
                 tambahBarangPresenter.addBarang(headerMap, hashTambahBarang);
             }

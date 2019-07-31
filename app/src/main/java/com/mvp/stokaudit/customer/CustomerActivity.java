@@ -24,7 +24,7 @@ import android.widget.Toast;
 import com.google.gson.internal.LinkedTreeMap;
 import com.mvp.stokaudit.GeneralFunction;
 import com.mvp.stokaudit.R;
-import com.mvp.stokaudit.login.MainActivity;
+import com.mvp.stokaudit.login.LoginActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -39,9 +39,9 @@ public class CustomerActivity extends AppCompatActivity implements CustomerView 
     private ListView listMain;
     private ProgressBar progressBar;
     private SharedPreferences mLogin;
-    private ArrayList<Customer> arrayCustomer;
+    private ArrayList<CustomerModel> arrayCustomer;
     private HashMap<String, String> hashCustomer;
-    private Customer customer;
+    private CustomerModel customer;
     private CustomerAdapter customerAdapter;
     private Integer startIndex = 0;
     private CustomerPresenter customerPresenter;
@@ -108,7 +108,7 @@ public class CustomerActivity extends AppCompatActivity implements CustomerView 
     public void getDataCustomer(List list) {
         for (Object object : list) {
             LinkedTreeMap linkedTreeMap = (LinkedTreeMap) object;
-            customer = new Customer(
+            customer = new CustomerModel(
                     (String) linkedTreeMap.get("customer_id"),
                     (String) linkedTreeMap.get("customer_name"),
                     (String) linkedTreeMap.get("alamat")
@@ -162,7 +162,7 @@ public class CustomerActivity extends AppCompatActivity implements CustomerView 
         for (Object object : list) {
             LinkedTreeMap linkedTreeMap = (LinkedTreeMap) object;
 
-            customer = new Customer(
+            customer = new CustomerModel(
                     (String) linkedTreeMap.get("customer_id"),
                     (String) linkedTreeMap.get("customer_name"),
                     (String) linkedTreeMap.get("alamat")
@@ -173,7 +173,7 @@ public class CustomerActivity extends AppCompatActivity implements CustomerView 
         if (customerAdapter != null) {
             customerAdapter.addMore(arrayCustomer);
         } else {
-            Log.d(CUSTOMER, "Customer adapter null");
+            Log.d(CUSTOMER, "CustomerModel adapter null");
             Toast.makeText(CustomerActivity.this, "Terjadi kesalahan", Toast.LENGTH_SHORT).show();
         }
     }
@@ -216,7 +216,7 @@ public class CustomerActivity extends AppCompatActivity implements CustomerView 
 
                 Toast.makeText(this, "Anda telah logout dari aplikasi ini", Toast.LENGTH_SHORT).show();
 
-                Intent i = new Intent(CustomerActivity.this, MainActivity.class);
+                Intent i = new Intent(CustomerActivity.this, LoginActivity.class);
                 startActivity(i);
                 finish();
 

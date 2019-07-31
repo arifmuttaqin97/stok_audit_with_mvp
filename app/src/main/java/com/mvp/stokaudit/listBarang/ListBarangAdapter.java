@@ -16,11 +16,11 @@ import java.util.List;
 class ListBarangAdapter extends BaseAdapter {
 
     private final Context context;
-    private final List<ListBarang> customer;
+    private final List<ListBarangModel> customer;
     private final String id_lokasi;
     private final String nama_site;
 
-    ListBarangAdapter(Context context, List<ListBarang> customer, String id_lokasi, String nama_site) {
+    ListBarangAdapter(Context context, List<ListBarangModel> customer, String id_lokasi, String nama_site) {
         this.context = context;
         this.customer = customer;
         this.id_lokasi = id_lokasi;
@@ -50,7 +50,7 @@ class ListBarangAdapter extends BaseAdapter {
 
         TextView textView = convertView.findViewById(R.id.textModel);
 
-        final ListBarang listBarangResponseData = customer.get(position);
+        final ListBarangModel listBarangResponseData = customer.get(position);
         textView.setText(listBarangResponseData.nama_barang);
 
         convertView.setOnClickListener(new View.OnClickListener() {
@@ -68,7 +68,7 @@ class ListBarangAdapter extends BaseAdapter {
         return convertView;
     }
 
-    void addMore(List<ListBarang> moreData) {
+    void addMore(List<ListBarangModel> moreData) {
         customer.addAll(moreData);
         notifyDataSetChanged();
     }

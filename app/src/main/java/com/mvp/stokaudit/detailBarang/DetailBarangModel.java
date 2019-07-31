@@ -1,9 +1,9 @@
 package com.mvp.stokaudit.detailBarang;
 
-class DetailBarang {
+class DetailBarangModel {
     String id_barang, id_lokasi, nama_barang, total_serial;
 
-    DetailBarang(String id_barang, String id_lokasi, String nama_barang, String total_serial) {
+    DetailBarangModel(String id_barang, String id_lokasi, String nama_barang, String total_serial) {
         this.id_barang = id_barang;
         this.id_lokasi = id_lokasi;
         this.nama_barang = nama_barang;

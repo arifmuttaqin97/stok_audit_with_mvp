@@ -16,9 +16,9 @@ import java.util.List;
 class DetailSerialBarangAdapter extends BaseAdapter {
 
     private final Context context;
-    private final List<DetailSerialBarang> customer;
+    private final List<DetailSerialBarangModel> customer;
 
-    DetailSerialBarangAdapter(Context context, List<DetailSerialBarang> customer) {
+    DetailSerialBarangAdapter(Context context, List<DetailSerialBarangModel> customer) {
         this.context = context;
         this.customer = customer;
     }
@@ -46,7 +46,7 @@ class DetailSerialBarangAdapter extends BaseAdapter {
 
         TextView textView = convertView.findViewById(R.id.textModel);
 
-        final DetailSerialBarang detailSerial = customer.get(position);
+        final DetailSerialBarangModel detailSerial = customer.get(position);
         textView.setText(detailSerial.serial);
 
         convertView.setOnClickListener(new View.OnClickListener() {
@@ -61,7 +61,7 @@ class DetailSerialBarangAdapter extends BaseAdapter {
         return convertView;
     }
 
-    void addMore(List<DetailSerialBarang> moreData) {
+    void addMore(List<DetailSerialBarangModel> moreData) {
         customer.addAll(moreData);
         notifyDataSetChanged();
     }

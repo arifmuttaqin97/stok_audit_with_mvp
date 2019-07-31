@@ -1,6 +1,6 @@
 package com.mvp.stokaudit.site;
 
-class Site {
+class SiteModel {
     String id_site;
     String nama_site;
     private String service_id;
@@ -8,7 +8,7 @@ class Site {
     private String kota_site;
     private String telp_site;
 
-    Site(String id_site, String service_id, String nama_site, String alamat_site, String kota_site, String telp_site) {
+    SiteModel(String id_site, String service_id, String nama_site, String alamat_site, String kota_site, String telp_site) {
         this.id_site = id_site;
         this.service_id = service_id;
         this.nama_site = nama_site;

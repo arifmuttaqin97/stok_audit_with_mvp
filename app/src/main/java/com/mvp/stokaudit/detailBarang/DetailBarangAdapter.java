@@ -16,9 +16,9 @@ import java.util.List;
 class DetailBarangAdapter extends BaseAdapter {
 
     private final Context context;
-    private final List<DetailBarang> customer;
+    private final List<DetailBarangModel> customer;
 
-    DetailBarangAdapter(Context context, List<DetailBarang> customer) {
+    DetailBarangAdapter(Context context, List<DetailBarangModel> customer) {
         this.context = context;
         this.customer = customer;
     }
@@ -47,7 +47,7 @@ class DetailBarangAdapter extends BaseAdapter {
         TextView textView = convertView.findViewById(R.id.textModel);
         TextView textView2 = convertView.findViewById(R.id.numberModel);
 
-        final DetailBarang detailBarangResponseData = customer.get(position);
+        final DetailBarangModel detailBarangResponseData = customer.get(position);
         textView.setText(detailBarangResponseData.nama_barang);
         textView2.setText(detailBarangResponseData.total_serial);
 
@@ -65,7 +65,7 @@ class DetailBarangAdapter extends BaseAdapter {
         return convertView;
     }
 
-    void addMore(List<DetailBarang> moreData) {
+    void addMore(List<DetailBarangModel> moreData) {
         customer.addAll(moreData);
         notifyDataSetChanged();
     }

@@ -70,7 +70,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".login.MainActivity"
+            android:name=".login.LoginActivity"
             android:theme="@style/Theme.Design.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
